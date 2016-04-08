@@ -2,15 +2,19 @@ var models = require('../models');
 
 exports.send = function(req, res) {
     console.log(req.body); // help you see what is inside of req.body
-    // your solution 
-    var newMessage = new models.Message(req.body);
+    //variables for the new content and date
+    var newMessage;
+    var date = new Date(); 
     //receive contents from a POST request
-    newMessage.save(afterSaving);//save to database
-
-    function afterSaving(err){ //this is a callback
-    	if(err) { console.log(err); res.send(500); }
-    	res.redirect('/'); //redirect back to / 
-
-    } 
-
+    if (req.body.email && req.body.content) {
+    	newMessage = new models.Message({
+    		'email': req.body.email, 
+    		'content': req.body.content, 
+    		'created': date.getDate()
+    	});
+    newMessage.save(function(err) {
+    	if (err) console.log(err);
+    	res.redirect('/'); 
+    });
+    }
 };

@@ -36,7 +36,7 @@ app.use(parser.body.json());
 
 // Routes
 app.get("/", router.index.view);
-app.post("/message", router.message.send); 
+app.post('/message', router.message.send); 
 
 // Start Server
 http.createServer(app).listen(app.get("port"), function() {

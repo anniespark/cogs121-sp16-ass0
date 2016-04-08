@@ -6,8 +6,8 @@ exports.view = function(req, res) {
     	.sort('-date')
     	.exec(displayMessages);
 
-    function displayMessages(err, messages) {
-    	var data = {data: message};
-    	res.render("index", data);
+    function displayMessages(err, message) {
+    	if (err) console.log(err); //shows error message
+    	res.render('index', {'data': message});
     }
 }
